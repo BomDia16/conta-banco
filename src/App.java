@@ -16,7 +16,8 @@ public class App {
 
         // Loop de execuções do código
         while (continuar) {
-            System.out.println("\n1. Inserir nova conta");
+            System.out.println("\n--- Menu Principal ---");
+            System.out.println("1. Inserir nova conta");
             System.out.println("2. Listar as contas");
 
             try {
