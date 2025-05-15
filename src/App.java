@@ -5,6 +5,9 @@ public class App {
     public static void main(String[] args) {
         // Chamando o menu principal
         menuPrincipal();
+
+        // saber que existe
+        // scanner.useDelimiter("\\n");
     }
 
     public static void menuPrincipal() {
