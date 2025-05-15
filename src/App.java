@@ -23,6 +23,11 @@ public class App {
             System.out.println("\n--- Menu Principal ---");
             System.out.println("1. Inserir nova conta");
             System.out.println("2. Listar as contas");
+            System.out.println("3. Consultar cheque especial");
+            System.out.println("4. Sacar dinheiro");
+            System.out.println("5. Depositar dinheiro");
+            System.out.println("6. Pagar um boleto");
+            System.out.println("7. Sair");
 
             try {
                 System.out.print("Insira uma opção: ");
@@ -31,6 +36,7 @@ public class App {
                 
                 // Tratamento de opções
                 switch (opcao) {
+                    // Inserir novos clientes
                     case 1 -> {
                         System.out.print("Insira o número do cliente: ");
                         int numero = scanner.nextInt();
@@ -57,8 +63,8 @@ public class App {
                         System.out.println("Cliente adicionado com sucesso!");
                     }
 
+                    // Listagem de clientes
                     case 2 -> {
-                        // Listagem de clientes
                         System.out.println("\n--- Lista de Contas ---");
                         if (clientes.isEmpty()) {
                             System.out.println("Nenhuma conta cadastrada.");
@@ -69,16 +75,13 @@ public class App {
                         }
                     }
 
-                    default -> System.out.println("Insira uma opção válida!");
-                }
-                // Inserir novo cliente
+                    // Sair do loop
+                    case 7 -> {
+                        continuar = false;
+                        System.out.println("Até mais!");
+                    }
 
-                // Checagem para sair do loop
-                System.out.print("\nGostaria de realizar mais alguma coisa? (y/n): ");
-                String resposta = scanner.nextLine();
-                if (resposta.equalsIgnoreCase("n")) {
-                    continuar = false;
-                    System.out.println("Até mais!");
+                    default -> System.out.println("Insira uma opção válida!");
                 }
             } catch (Exception e) {
                 System.out.println("Insira uma opção válida!");

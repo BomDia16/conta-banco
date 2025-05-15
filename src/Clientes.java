@@ -4,7 +4,7 @@ public class Clientes {
     private int numero;
     private String agencia;
     private String nome;
-    private double saldo;
+    private Saldo saldo = new Saldo();
 
     public int getNumero() {
         return numero;
@@ -31,11 +31,11 @@ public class Clientes {
     }
 
     public double getSaldo() {
-        return saldo;
+        return saldo.getSaldo();
     }
 
     public void setSaldo(double saldo) {
-        this.saldo = saldo;
+        this.saldo.setSaldo(saldo);
     }
 
     // Inserir novos clientes
@@ -52,8 +52,7 @@ public class Clientes {
         numero = getNumero();
         nome = getNome();
         agencia = getAgencia();
-        saldo = getSaldo();
         
-        return numero + ". " + nome + " | Agência: " + agencia + " | Saldo: R$ " + saldo;
+        return numero + ". " + nome + " | Agência: " + agencia + " | Saldo: R$ " + this.saldo.getSaldo();
     }
 }
