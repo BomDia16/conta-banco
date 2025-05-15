@@ -4,30 +4,16 @@ public class Clientes {
     private int numero;
     private String agencia;
     private String nome;
+    @SuppressWarnings("FieldMayBeFinal")
     private Saldo saldo = new Saldo();
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
+    private double chequeEspecial;
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getNumero() {
+        return numero;
     }
 
     public double getSaldo() {
@@ -36,23 +22,41 @@ public class Clientes {
 
     public void setSaldo(double saldo) {
         this.saldo.setSaldo(saldo);
+        SetChequeSaldo(saldo);
+    }
+
+    public double GetChequeEspecial(int numeroCliente) {
+        return chequeEspecial;
+    }
+
+    public void SetChequeSaldo(double saldo) {
+        if (saldo <= 500) {
+            this.chequeEspecial = 50;
+        } else {
+            this.chequeEspecial = saldo * 0.5;
+        }
+    }
+
+    public Clientes() {
+
     }
 
     // Inserir novos clientes
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Clientes(int numero, String agencia, String nome, double saldo) {
-        setNumero(numero);
-        setAgencia(agencia);
-        setNome(nome);
+        this.numero = numero;
+        this.agencia = agencia;
+        this.nome = nome;
         setSaldo(saldo);
     }
 
     // Mensagem de listagem de clientes
     public String Mensagem() {
-        numero = getNumero();
-        nome = getNome();
-        agencia = getAgencia();
+        numero = this.numero;
+        nome = this.nome;
+        agencia = this.agencia;
+        chequeEspecial = this.chequeEspecial;
         
-        return numero + ". " + nome + " | Agência: " + agencia + " | Saldo: R$ " + this.saldo.getSaldo();
+        return numero + ". " + nome + " | Agência: " + agencia + " | Saldo: R$ " + this.saldo.getSaldo() + " | Cheque Especial: R$ " + chequeEspecial;
     }
 }

@@ -24,8 +24,8 @@ public class App {
             System.out.println("1. Inserir nova conta");
             System.out.println("2. Listar as contas");
             System.out.println("3. Consultar cheque especial");
-            System.out.println("4. Sacar dinheiro");
-            System.out.println("5. Depositar dinheiro");
+            System.out.println("4. Depositar dinheiro");
+            System.out.println("5. Sacar dinheiro");
             System.out.println("6. Pagar um boleto");
             System.out.println("7. Sair");
 
@@ -74,6 +74,96 @@ public class App {
                             }
                         }
                     }
+                    
+                    // Consultar cheque especial
+                    case 3 -> {
+                        System.out.print("\nInsira o número da conta do cliente que deseja vizualizar: ");
+                        int numeroCliente = scanner.nextInt();
+                        if (checarClienteExiste(numeroCliente, clientes)) {
+                            for (Clientes c : clientes) {
+                                if (c.getNumero() == numeroCliente) {    
+                                    double chequeEspecial = c.GetChequeEspecial(numeroCliente);
+                                    String nome = c.getNome();
+                                    System.out.println("Cheque especial de " + nome + " é de R$ " + chequeEspecial);
+                                }
+                            }
+                        }
+                    }
+
+                    // Depositar dinheiro
+                    case 4 -> {
+                        System.out.print("\nInsira o número da conta que gostaria de depositar: ");
+                        int numeroCliente = scanner.nextInt();
+
+                        if (checarClienteExiste(numeroCliente, clientes)) {
+                            System.out.print("\nInsira o valor do depósito: ");
+                            double deposito = scanner.nextDouble();
+
+                            for (Clientes c : clientes) {
+                                if (c.getNumero() == numeroCliente) {
+                                    double novoDeposito = c.getSaldo() + deposito;
+                                    c.setSaldo(novoDeposito);
+
+                                    System.out.println("Valor R$ " + deposito + " depositado com sucesso!");
+                                }
+                            }
+                        }
+                    }
+
+                    // Sacar dinheiro
+                    case 5 -> {
+                        System.out.print("\nInsira o número da conta que gostaria de sacar: ");
+                        int numeroCliente = scanner.nextInt();
+
+                        if (checarClienteExiste(numeroCliente, clientes)) {
+                            System.out.print("\nInsira o valor do saque: ");
+                            double saque = scanner.nextDouble();
+
+                            if (saque > 0) {
+                                for (Clientes c : clientes) {
+                                    if (c.getNumero() == numeroCliente) {
+                                        if (c.getSaldo() > 0 && c.getSaldo() >= saque) {
+                                            double novoSaque = c.getSaldo() - saque;
+                                            c.setSaldo(novoSaque);
+
+                                            System.out.println("Valor R$ " + saque + " sacado com sucesso!");
+                                        } else {
+                                            System.out.println("Não há dinheiro suficiente para sacar!");
+                                        }
+                                    }
+                                }
+                            } else {
+                                System.out.println("Insira um saque de valor positivo!");
+                            }
+                        }
+                    }
+
+                    case 6 -> {
+                        System.out.print("\nInsira o número da conta que gostaria de efetuar o pagamento do boleto: ");
+                        int numeroCliente = scanner.nextInt();
+
+                        if (checarClienteExiste(numeroCliente, clientes)) {
+                            System.out.print("\nInsira o valor do boleto: ");
+                            double boleto = scanner.nextDouble();
+
+                            if (boleto > 0) {
+                                for (Clientes c : clientes) {
+                                    if (c.getNumero() == numeroCliente) {
+                                        if (c.getSaldo() > 0 && c.getSaldo() >= boleto) {
+                                            double novoBoleto = c.getSaldo() - boleto;
+                                            c.setSaldo(novoBoleto);
+
+                                            System.out.println("Valor de R$ " + boleto + " do boleto pago com sucesso!");
+                                        } else {
+                                            System.out.println("Não há dinheiro suficiente para pagar!");
+                                        }
+                                    }
+                                }
+                            } else {
+                                System.out.println("Insira um boleto de valor positivo!");
+                            }
+                        }
+                    }
 
                     // Sair do loop
                     case 7 -> {
@@ -90,5 +180,23 @@ public class App {
         }
 
         scanner.close();
+    }
+
+    public static boolean checarClienteExiste(int numeroCliente, ArrayList<Clientes> clientes) {
+        boolean checkCliente = false;
+
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhuma conta cadastrada.");
+        } else {
+            for (Clientes c : clientes) {
+                if (c.getNumero() == numeroCliente) {
+                    checkCliente = true;
+                } else {
+                    System.out.println("Nenhuma conta com esse número cadastrado!");
+                }
+            }
+        }
+
+        return checkCliente;
     }
 }
