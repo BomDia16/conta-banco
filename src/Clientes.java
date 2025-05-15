@@ -39,6 +39,7 @@ public class Clientes {
     }
 
     // Inserir novos clientes
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public Clientes(int numero, String agencia, String nome, double saldo) {
         setNumero(numero);
         setAgencia(agencia);

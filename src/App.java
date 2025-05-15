@@ -10,6 +10,7 @@ public class App {
         // scanner.useDelimiter("\\n");
     }
 
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void menuPrincipal() {
         boolean continuar = true;
         Scanner scanner = new Scanner(System.in);
@@ -30,9 +31,7 @@ public class App {
                 
                 // Tratamento de opções
                 switch (opcao) {
-
-                    // Inserir novo cliente
-                    case 1:
+                    case 1 -> {
                         System.out.print("Insira o número do cliente: ");
                         int numero = scanner.nextInt();
                         scanner.nextLine();
@@ -56,10 +55,9 @@ public class App {
                         Clientes novoCliente = new Clientes(numero, agencia, nome, saldo);
                         clientes.add(novoCliente);
                         System.out.println("Cliente adicionado com sucesso!");
-                        break;
+                    }
 
-                    case 2:
-
+                    case 2 -> {
                         // Listagem de clientes
                         System.out.println("\n--- Lista de Contas ---");
                         if (clientes.isEmpty()) {
@@ -69,12 +67,11 @@ public class App {
                                 System.out.println(c.Mensagem());
                             }
                         }
-                        break;
+                    }
 
-                    default:
-                        System.out.println("Insira uma opção válida!");
-                        break;
+                    default -> System.out.println("Insira uma opção válida!");
                 }
+                // Inserir novo cliente
 
                 // Checagem para sair do loop
                 System.out.print("\nGostaria de realizar mais alguma coisa? (y/n): ");
